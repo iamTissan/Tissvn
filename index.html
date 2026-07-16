@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="David Moses — Tissan. Frontend Web Developer building clean, fast, and well-crafted interfaces." />
+  <meta property="og:title" content="Tissan — Frontend Developer" />
+  <meta property="og:description" content="Frontend Web Developer. Clean code. Sharp interfaces." />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/177271988?v=4" />
+  <title>Tissan — Frontend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor">
+  <img src="https://avatars.githubusercontent.com/u/177271988?v=4" alt="" aria-hidden="true" />
+</div>
+<div id="cursor-ring"></div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-modal">
+    <div class="search-top">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="searchInput" placeholder="Search pages, sections..." autocomplete="off" spellcheck="false" />
+      <span class="kbd">ESC</span>
+    </div>
+    <div class="search-body" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav>
+  <a class="nav-brand" href="#" onclick="showPage('main'); return false;">tissan.</a>
+  <ul class="nav-links">
+    <li><a href="#stack" onclick="showPage('main')">Stack</a></li>
+    <li><a href="#projects" onclick="showPage('main')">Projects</a></li>
+    <li><a href="#experience" onclick="showPage('main')">Experience</a></li>
+    <li><a href="#opensource" onclick="showPage('main')">Open Source</a></li>
+    <li><a href="#" onclick="showPage('components'); return false;">Components</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="search-btn" onclick="openSearch()">
+      <span>Search</span>
+      <span class="kbd">Ctrl+S</span>
+    </button>
+    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme"></div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     MAIN PAGE
+     ============================================================ -->
+<div class="page active" id="page-main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-eyebrow">
+            <span class="hero-dot"></span>
+            Available for opportunities
+          </div>
+          <h1 class="hero-name">
+            David<br>
+            <span class="hero-name-muted">Moses.</span>
+          </h1>
+          <p class="hero-title">Frontend Web Developer · @iamtissan</p>
+          <p class="hero-bio">
+            I build interfaces that are clean, fast, and built to last.
+            Focused on the frontend — from layout to interaction — and active
+            in open source through Drips Network.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary" onclick="showPage('main')">View Projects →</a>
+            <a href="#contact" class="btn btn-ghost" onclick="showPage('main')">Get in touch</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <div class="hero-stat-value">29</div>
+              <div class="hero-stat-label">OSS Issues Closed</div>
+            </div>
+            <div>
+              <div class="hero-stat-value">7.1k</div>
+              <div class="hero-stat-label">Drips Points</div>
+            </div>
+            <div>
+              <div class="hero-stat-value">2+</div>
+              <div class="hero-stat-label">Years Building</div>
+            </div>
+            <div>
+              <div class="hero-stat-value">13+</div>
+              <div class="hero-stat-label">Repos Contributed</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-avatar">
+          <img
+            src="https://avatars.githubusercontent.com/u/177271988?v=4"
+            alt="David Moses — Tissan"
+            onerror="this.style.display='none'; this.parentElement.querySelector('.hero-avatar-fallback').style.display='flex';"
+          />
+          <div class="hero-avatar-fallback" style="display:none;">DM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider-full">
+
+  <!-- STACK -->
+  <section id="stack" class="fade-up">
+    <div class="container">
+      <div class="section-label">My Stack</div>
+      <p class="stack-primary-label">Core Technologies</p>
+      <div class="stack-grid">
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
+          <span class="stack-item-name">HTML5</span>
+          <span class="stack-item-type">Markup</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
+          <span class="stack-item-name">CSS3</span>
+          <span class="stack-item-type">Styling</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" alt="SCSS" />
+          <span class="stack-item-name">SCSS</span>
+          <span class="stack-item-type">Preprocessor</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" />
+          <span class="stack-item-name">Tailwind CSS</span>
+          <span class="stack-item-type">CSS Framework</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
+          <span class="stack-item-name">JavaScript</span>
+          <span class="stack-item-type">Language</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" />
+          <span class="stack-item-name">Bootstrap</span>
+          <span class="stack-item-type">UI Framework</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" alt="Supabase" />
+          <span class="stack-item-name">Supabase</span>
+          <span class="stack-item-type">Backend / DB</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" />
+          <span class="stack-item-name">Figma</span>
+          <span class="stack-item-type">Design</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg" alt="Vite" />
+          <span class="stack-item-name">Vite</span>
+          <span class="stack-item-type">Build Tool</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter: var(--github-icon-filter);" />
+          <span class="stack-item-name">Git & GitHub</span>
+          <span class="stack-item-type">Version Control</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" alt="npm" />
+          <span class="stack-item-name">npm</span>
+          <span class="stack-item-type">Package Manager</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" />
+          <span class="stack-item-name">VS Code</span>
+          <span class="stack-item-type">Editor</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-item-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
+          <span class="stack-item-name">React</span>
+          <span class="stack-item-type">UI Library</span>
+        </div>
+      </div>
+
+      <div class="stack-oss" style="margin-top:16px;">
+        <span class="stack-oss-label">Open Source Contribution Stacks</span>
+        <div class="stack-oss-tags">
+          <span class="oss-tag">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" alt="Rust" />
+            Rust
+          </span>
+          <span class="oss-tag">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg" alt="Solidity" />
+            Solidity
+          </span>
+          <span class="oss-tag">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="Web3 Frontend" />
+            Web3 Frontend
+          </span>
+          <span class="oss-tag">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" />
+            TypeScript
+          </span>
+          <span class="oss-tag" style="gap:6px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#9b8afb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Stellar / Soroban
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider-full">
+
+  <!-- PROJECTS -->
+  <section id="projects" class="fade-up">
+    <div class="container">
+      <div class="section-label">Projects</div>
+      <div class="projects-grid">
+
+        <!-- PROJECT 01 — WOW Surprises -->
+        <a class="project-card" href="https://wow-suprises.vercel.app/" target="_blank" rel="noopener">
+          <div class="project-thumb">
+            <img
+              src="https://wow-suprises.vercel.app/images/logo.png"
+              alt="WOW Surprises"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            <div class="project-thumb-placeholder" style="display:none; background:linear-gradient(135deg,#1a1a2e,#16213e);">WOW Surprises</div>
+          </div>
+          <div class="project-body">
+            <div class="project-card-top">
+              <span class="project-num">01</span>
+              <span class="project-link">↗ Visit</span>
+            </div>
+            <div class="project-title">WOW Surprises</div>
+            <div class="project-desc">A surprise experience booking platform — browse packages, build custom surprises, and plan unforgettable moments for loved ones across Nigeria.</div>
+            <div class="project-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Supabase</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- PROJECT 02 — School Bus Track Pro -->
+        <a class="project-card" href="https://bustrack-alpha.vercel.app/" target="_blank" rel="noopener">
+          <div class="project-thumb">
+            <div class="project-thumb-placeholder" style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); color:#4ade80;">
+              School Bus Track Pro
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-card-top">
+              <span class="project-num">02</span>
+              <span class="project-link">↗ Visit</span>
+            </div>
+            <div class="project-title">School Bus Track Pro</div>
+            <div class="project-desc">A multi-tenant SaaS platform for school bus fleet management — real-time tracking, role-based dashboards for admins, drivers, and parents.</div>
+            <div class="project-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Supabase</span>
+              <span class="tag">Leaflet.js</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- PROJECT 03 — GEM Crispy -->
+        <a class="project-card" href="https://gem-crispy-confectonaries-website.vercel.app/" target="_blank" rel="noopener">
+          <div class="project-thumb">
+            <img
+              src="https://gem-crispy-confectonaries-website.vercel.app/assets/products/plantain-chips-snack-pack-1.jpg"
+              alt="GEM Crispy Confectioneries"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            <div class="project-thumb-placeholder" style="display:none; background:linear-gradient(135deg,#3d2000,#7a4500);">GEM Crispy</div>
+          </div>
+          <div class="project-body">
+            <div class="project-card-top">
+              <span class="project-num">03</span>
+              <span class="project-link">↗ Visit</span>
+            </div>
+            <div class="project-title">GEM Crispy Confectioneries</div>
+            <div class="project-desc">Marketing website for an artisanal Nigerian snack brand — product showcase, enquiry forms, newsletter, and equipment catalogue. Built for a real client.</div>
+            <div class="project-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Supabase</span>
+              <span class="tag">Brevo</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- PROJECT 04 — Placeholder -->
+        <div class="project-card">
+          <div class="project-thumb">
+            <div class="project-thumb-placeholder" style="background:var(--bg3);">Coming Soon</div>
+          </div>
+          <div class="project-body">
+            <div class="project-card-top">
+              <span class="project-num">04</span>
+              <span class="project-link" style="opacity:0.4;">↗ Soon</span>
+            </div>
+            <div class="project-title" style="color:var(--text-muted);">Next Project</div>
+            <div class="project-desc">Something new is in the works. Check back soon.</div>
+            <div class="project-tags">
+              <span class="tag">TBD</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider-full">
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="fade-up">
+    <div class="container">
+      <div class="section-label">Experience</div>
+
+      <!-- WORK -->
+      <p class="exp-group-label">Work</p>
+      <div class="exp-list" style="margin-bottom:32px;">
+        <div class="exp-item">
+          <div>
+            <div class="exp-role">Software Engineer</div>
+            <div class="exp-company">Bex Innovation Labs</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">Sep 2025 — Present</div>
+            <span class="exp-badge active">● Active</span>
+          </div>
+          <div class="exp-desc">
+            Building and maintaining production web platforms for clients across Nigeria — handling full frontend delivery, Supabase integrations, and multi-role SaaS architecture. Working across concurrent projects at different lifecycle stages.
+          </div>
+        </div>
+        <div class="exp-item">
+          <div>
+            <div class="exp-role">Frontend Developer Intern</div>
+            <div class="exp-company">Greyhob Technologies</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">Jul 2024 — Dec 2024</div>
+            <span class="exp-badge">6 months</span>
+          </div>
+          <div class="exp-desc">
+            6-month internship building responsive web interfaces, working within a team codebase, and translating designs into functional frontend implementations. Foundation in professional development workflows and standards.
+          </div>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <p class="exp-group-label">Education</p>
+      <div class="exp-list" style="margin-bottom:32px;">
+        <div class="exp-item">
+          <div>
+            <div class="exp-role">BSc Computer Science</div>
+            <div class="exp-company">Kaduna State University, Nigeria</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">2020 — 2025</div>
+            <span class="exp-badge">Graduated</span>
+          </div>
+          <div class="exp-desc">
+            Bachelor of Science in Computer Science. Built a strong foundation in software engineering principles, data structures, algorithms, and systems design alongside hands-on web development practice.
+          </div>
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS -->
+      <p class="exp-group-label">Certifications &amp; Badges</p>
+      <div class="cert-grid">
+
+        <div class="cert-card">
+          <div class="cert-logo cert-logo-wp">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress" />
+          </div>
+          <div class="cert-info">
+            <div class="cert-name">Certified Web Designer</div>
+            <div class="cert-issuer">WordPress</div>
+            <span class="cert-badge-label cert-wp">Certified</span>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-logo">
+            <img src="digital-awareness.png" alt="Digital Awareness Badge" />
+          </div>
+          <div class="cert-info">
+            <div class="cert-name">Digital Awareness</div>
+            <div class="cert-issuer">Cisco Networking Academy</div>
+            <span class="cert-badge-label cert-cisco">Verified &middot; Sep 2025</span>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-logo">
+            <img src="computer-hardware-basics.png" alt="Computer Hardware Basics Badge" />
+          </div>
+          <div class="cert-info">
+            <div class="cert-name">Computer Hardware Basics</div>
+            <div class="cert-issuer">Cisco Networking Academy</div>
+            <span class="cert-badge-label cert-cisco">Verified &middot; Sep 2025</span>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-logo">
+            <img src="learn-a-thon.png" alt="Learn-A-Thon 2025 Badge" />
+          </div>
+          <div class="cert-info">
+            <div class="cert-name">Learn-A-Thon 2025</div>
+            <div class="cert-issuer">Cisco Networking Academy</div>
+            <span class="cert-badge-label cert-cisco">Participant &middot; 2025</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider-full">
+
+  <!-- OPEN SOURCE -->
+  <section id="opensource" class="fade-up">
+    <div class="container">
+      <div class="section-label">Open Source</div>
+
+      <div class="oss-header">
+        <div>
+          <div class="oss-title">Drips Network Contributor</div>
+          <div class="oss-subtitle">
+            Active contributor on the Drips Wave platform — participating in monthly contribution sprints
+            across Stellar, Soroban, and web3 frontend projects. 29 resolved issues across 13+ repos.
+          </div>
+          <div style="margin-top:14px;">
+            <a href="https://www.drips.network/wave/users/d777fc0f-ec8b-4e99-ae6e-353120be7483"
+               target="_blank" rel="noopener"
+               class="btn btn-ghost" style="font-size:0.65rem; padding:7px 14px;">
+              View Drips Profile ↗
+            </a>
+          </div>
+        </div>
+        <div class="oss-points">
+          <div class="oss-points-value">7,100</div>
+          <div class="oss-points-label">All-time Points</div>
+        </div>
+      </div>
+
+      <div class="oss-grid">
+        <a href="https://github.com/Agora-Events/agora" target="_blank" rel="noopener" class="oss-card">
+          <div class="oss-card-top">
+            <span class="oss-card-repo">Agora-Events/agora</span>
+            <span class="oss-card-points">+1,000 pts</span>
+          </div>
+          <div class="oss-card-title">Frontend, docs & responsive improvements across 5 issues</div>
+          <div class="oss-card-issue">5 issues · ARIA, lazy loading, footer, docs, mobile</div>
+        </a>
+        <a href="https://github.com/Emmy123222/Stellar-MicroPay" target="_blank" rel="noopener" class="oss-card">
+          <div class="oss-card-top">
+            <span class="oss-card-repo">Emmy123222/Stellar-MicroPay</span>
+            <span class="oss-card-points">+1,200 pts</span>
+          </div>
+          <div class="oss-card-title">Dark mode, UI cursor fixes, favicon & OG meta tags</div>
+          <div class="oss-card-issue">4 issues · highest point issues (400pts each)</div>
+        </a>
+        <a href="https://github.com/Soroban-Cookbook/Soroban-Cookbook-" target="_blank" rel="noopener" class="oss-card">
+          <div class="oss-card-top">
+            <span class="oss-card-repo">Soroban-Cookbook</span>
+            <span class="oss-card-points">+750 pts</span>
+          </div>
+          <div class="oss-card-title">CSS optimization, skeleton states, style guide & contributing docs</div>
+          <div class="oss-card-issue">4 issues across 2 repos</div>
+        </a>
+        <a href="https://github.com/BCPathway/bc-forge" target="_blank" rel="noopener" class="oss-card">
+          <div class="oss-card-top">
+            <span class="oss-card-repo">BCPathway/bc-forge</span>
+            <span class="oss-card-points">+400 pts</span>
+          </div>
+          <div class="oss-card-title">Reusable modal & button components for the frontend</div>
+          <div class="oss-card-issue">2 issues · UI component work</div>
+        </a>
+        <a href="https://github.com/Emmy123222/Stellar-MarketPay-" target="_blank" rel="noopener" class="oss-card">
+          <div class="oss-card-top">
+            <span class="oss-card-repo">Stellar-MarketPay</span>
+            <span class="oss-card-points">+400 pts</span>
+          </div>
+          <div class="oss-card-title">Hover card preview for job listings browse page</div>
+          <div class="oss-card-issue">1 issue · UX enhancement</div>
+        </a>
+        <a href="https://github.com/JafetCHVDev/soroban-quest" target="_blank" rel="noopener" class="oss-card">
+          <div class="oss-card-top">
+            <span class="oss-card-repo">soroban-quest / ajo</span>
+            <span class="oss-card-points">+150 pts</span>
+          </div>
+          <div class="oss-card-title">Comprehensive a11y improvements</div>
+          <div class="oss-card-issue">1 issue · Soroban / accessibility</div>
+        </a>
+        <a href="https://www.drips.network/wave/users/d777fc0f-ec8b-4e99-ae6e-353120be7483"
+           target="_blank" rel="noopener" class="oss-view-all">
+          View all 29 contributions on Drips ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider-full">
+
+  <!-- GITHUB CONTRIBUTIONS -->
+  <section id="github" class="fade-up">
+    <div class="container">
+      <div class="section-label">GitHub Activity</div>
+      <div class="github-card">
+        <div class="github-card-header">
+          <div class="github-card-title">@iamTissan on GitHub</div>
+          <a href="https://github.com/iamTissan" target="_blank" rel="noopener" class="github-card-link">
+            View Profile ↗
+          </a>
+        </div>
+        <div id="github-heatmap" class="github-heatmap">
+          <div class="github-loading">Loading contributions…</div>
+        </div>
+        <div class="github-heatmap-footer">
+          <span class="github-heatmap-total" id="github-total"></span>
+          <div class="github-legend">
+            <span>Less</span>
+            <div class="github-legend-day" style="background:var(--bg3)"></div>
+            <div class="github-legend-day" data-count="1" style="background:#1a3a1a"></div>
+            <div class="github-legend-day" data-count="2" style="background:#1e5a1e"></div>
+            <div class="github-legend-day" data-count="3" style="background:#267a26"></div>
+            <div class="github-legend-day" data-count="4" style="background:#2ea82e"></div>
+            <span>More</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider-full">
+
+  <!-- SPOTIFY -->
+  <section id="spotify" class="fade-up">
+    <div class="container">
+      <div class="section-label">Currently Listening</div>
+      <div class="spotify-card" id="spotify-widget">
+        <!-- Populated by spotify.js -->
+        <div class="spotify-art">
+          <span class="spotify-art-placeholder">♫</span>
+        </div>
+        <div class="spotify-info">
+          <div class="spotify-track">Loading…</div>
+          <div class="spotify-artist"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider-full">
+
+  <!-- CONTACT -->
+  <section id="contact" class="fade-up">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <div class="contact-grid">
+        <a href="mailto:hello@iamtissan.dev" class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">tissandavid@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://github.com/iamTissan" target="_blank" rel="noopener" class="contact-item">
+          <div class="contact-icon">⬡</div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">github.com/iamTissan</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/iamtissan" target="_blank" rel="noopener" class="contact-item">
+          <div class="contact-icon">◈</div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">www.linkedin.com/in/iamtissan</div>
+          </div>
+        </a>
+        <a href="https://twitter.com/iamtissan" target="_blank" rel="noopener" class="contact-item">
+          <div class="contact-icon">✕</div>
+          <div>
+            <div class="contact-label">Twitter / X</div>
+            <div class="contact-value">@iamtissan</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-left">© 2025 David Moses — Tissan</span>
+    <span class="footer-right">Frontend Developer · Lagos, NG</span>
+  </footer>
+
+</div><!-- /page-main -->
+
+
+<!-- ============================================================
+     COMPONENTS PAGE
+     ============================================================ -->
+<div class="page" id="page-components">
+
+  <div class="container">
+    <div class="comp-header">
+      <a href="#" onclick="showPage('main'); return false;" class="comp-back">← Back to portfolio</a>
+      <div class="comp-title">Components</div>
+      <p class="comp-subtitle">
+        A collection of UI components I've built. Pure HTML, CSS & JavaScript —
+        no frameworks, no libraries. Copy-paste ready.
+      </p>
+    </div>
+
+    <div class="comp-grid">
+
+      <!-- 01 BUTTONS -->
+      <div class="comp-card">
+        <div class="comp-card-meta">
+          <div class="comp-card-num">Component / 01</div>
+          <div class="comp-card-name">Button Variants</div>
+        </div>
+        <div class="comp-preview">
+          <button class="c-btn c-btn-solid">Primary</button>
+          <button class="c-btn c-btn-outline">Outline</button>
+          <button class="c-btn c-btn-ghost">Ghost</button>
+        </div>
+      </div>
+
+      <!-- 02 BADGES -->
+      <div class="comp-card">
+        <div class="comp-card-meta">
+          <div class="comp-card-num">Component / 02</div>
+          <div class="comp-card-name">Status Badges</div>
+        </div>
+        <div class="comp-preview">
+          <span class="c-badge c-badge-green">● Active</span>
+          <span class="c-badge c-badge-yellow">● Pending</span>
+          <span class="c-badge c-badge-red">● Inactive</span>
+          <span class="c-badge c-badge-default">Default</span>
+        </div>
+      </div>
+
+      <!-- 03 CARD -->
+      <div class="comp-card">
+        <div class="comp-card-meta">
+          <div class="comp-card-num">Component / 03</div>
+          <div class="comp-card-name">Info Card</div>
+        </div>
+        <div class="comp-preview">
+          <div class="c-card">
+            <div class="c-card-title">Card Title</div>
+            <div class="c-card-body">Supporting description text goes here for context.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 INPUT -->
+      <div class="comp-card">
+        <div class="comp-card-meta">
+          <div class="comp-card-num">Component / 04</div>
+          <div class="comp-card-name">Text Input</div>
+        </div>
+        <div class="comp-preview">
+          <input class="c-input" placeholder="Type something…" />
+        </div>
+      </div>
+
+      <!-- 05 TOOLTIP -->
+      <div class="comp-card">
+        <div class="comp-card-meta">
+          <div class="comp-card-num">Component / 05</div>
+          <div class="comp-card-name">Tooltip</div>
+        </div>
+        <div class="comp-preview" style="overflow:visible; padding-top:44px;">
+          <div class="c-tooltip-wrap">
+            <span class="c-tooltip">This is a tooltip</span>
+            <span class="c-tooltip-trigger">Hover over me</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 AVATAR GROUP -->
+      <div class="comp-card">
+        <div class="comp-card-meta">
+          <div class="comp-card-num">Component / 06</div>
+          <div class="comp-card-name">Avatar Group</div>
+        </div>
+        <div class="comp-preview">
+          <div class="c-avatar-group">
+            <div class="c-avatar">DM</div>
+            <div class="c-avatar">AB</div>
+            <div class="c-avatar">TK</div>
+            <div class="c-avatar">+4</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 TOGGLE -->
+      <div class="comp-card">
+        <div class="comp-card-meta">
+          <div class="comp-card-num">Component / 07</div>
+          <div class="comp-card-name">Toggle Switch</div>
+        </div>
+        <div class="comp-preview" style="gap:16px;">
+          <div class="c-toggle on" onclick="this.classList.toggle('on'); this.classList.toggle('off');"></div>
+          <div class="c-toggle off" onclick="this.classList.toggle('on'); this.classList.toggle('off');"></div>
+        </div>
+      </div>
+
+      <!-- 08 COMING SOON -->
+      <div class="comp-card" style="opacity:0.5;">
+        <div class="comp-card-meta">
+          <div class="comp-card-num">Component / 08</div>
+          <div class="comp-card-name">More coming soon</div>
+        </div>
+        <div class="comp-preview" style="color:var(--text-muted); font-size:0.72rem; justify-content:flex-start; align-items:flex-start;">
+          Tabs, Modals, Dropdowns, Data Tables…
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer style="margin-top:64px;">
+    <span class="footer-left">© 2026 David Moses — Tissan</span>
+    <span class="footer-right">Components Library</span>
+  </footer>
+
+</div><!-- /page-components -->
+
+<script src="js/main.js"></script>
+<script src="js/github.js"></script>
+<script src="js/spotify.js"></script>
+</body>
+</html>
