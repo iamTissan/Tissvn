@@ -1,105 +1,87 @@
 /* ============================================
    TISSAN PORTFOLIO — spotify.js
-   Currently: Static decorative widget
-   Later: Live Spotify "Now Playing" via API
-
-   TO ACTIVATE LIVE MODE:
-   1. Go to https://developer.spotify.com/dashboard
-   2. Create an app → get Client ID + Client Secret
-   3. Set redirect URI to http://localhost:3000/callback
-   4. Get your refresh token using the auth flow
-   5. Set up a small serverless function (Vercel) to
-      proxy /api/now-playing — it exchanges your
-      refresh token for an access token and calls:
-      https://api.spotify.com/v1/me/player/currently-playing
-   6. Replace SPOTIFY_API_URL below with your endpoint
-   7. Set LIVE_MODE = true
-
+   Live "Now Playing" via /api/now-playing
    ============================================ */
 
-const LIVE_MODE = false;
-const SPOTIFY_API_URL = '/api/now-playing'; // your Vercel function
+const SPOTIFY_API_URL = '/api/now-playing';
+const POLL_MS = 30000;
 
-// Static playlist data for the decorative widget
-const STATIC_TRACKS = [
-  { name: 'Essence', artist: 'WizKid ft. Tems', playing: true },
-  { name: 'Ye', artist: 'Burna Boy', playing: false },
-  { name: 'Kaleidoscope', artist: 'Coldplay', playing: false },
-  { name: 'Die With A Smile', artist: 'Lady Gaga, Bruno Mars', playing: false },
-  { name: 'Nothing', artist: 'Bruno Major', playing: false },
-];
+function esc(str) {
+  const d = document.createElement('div');
+  d.textContent = str == null ? '' : String(str);
+  return d.innerHTML;
+}
 
-let currentTrackIndex = 0;
-
-function renderSpotifyWidget(track) {
+function renderSpotifyWidget({ title, artist, art, url, playing, label }) {
   const widget = document.getElementById('spotify-widget');
   if (!widget) return;
 
+  const artHtml = art
+    ? `<img src="${esc(art)}" alt="${esc(title)} cover" />`
+    : `<span class="spotify-art-placeholder">♫</span>`;
+
+  const trackHtml = url
+    ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(title)}</a>`
+    : esc(title);
+
   widget.innerHTML = `
-    <div class="spotify-art">
-      ${track.art
-        ? `<img src="${track.art}" alt="${track.name} cover" />`
-        : `<span class="spotify-art-placeholder">♫</span>`
-      }
-    </div>
+    <div class="spotify-art">${artHtml}</div>
     <div class="spotify-info">
-      <div class="spotify-track">${track.name}</div>
-      <div class="spotify-artist">${track.artist}</div>
+      <div class="spotify-track">${trackHtml}</div>
+      <div class="spotify-artist">${esc(artist)}</div>
       <div class="spotify-meta">
         <span class="spotify-badge">
-          <span class="spotify-badge-dot"></span>
-          ${LIVE_MODE ? 'Now Playing' : 'Listening'}
+          ${playing ? '<span class="spotify-badge-dot"></span>' : ''}
+          ${esc(label)}
         </span>
         <span class="spotify-label">· Spotify</span>
       </div>
     </div>
+    ${playing ? `
     <div class="spotify-bars">
       <div class="spotify-bar"></div>
       <div class="spotify-bar"></div>
       <div class="spotify-bar"></div>
       <div class="spotify-bar"></div>
-    </div>
+    </div>` : ''}
   `;
 }
 
-async function fetchNowPlaying() {
-  if (!LIVE_MODE) {
-    renderSpotifyWidget(STATIC_TRACKS[currentTrackIndex]);
-    // Rotate tracks every 10 seconds for demo effect
-    setInterval(() => {
-      currentTrackIndex = (currentTrackIndex + 1) % STATIC_TRACKS.length;
-      const widget = document.getElementById('spotify-widget');
-      if (widget) {
-        widget.style.opacity = '0';
-        widget.style.transition = 'opacity 0.4s';
-        setTimeout(() => {
-          renderSpotifyWidget(STATIC_TRACKS[currentTrackIndex]);
-          widget.style.opacity = '1';
-        }, 400);
-      }
-    }, 10000);
-    return;
-  }
+function renderOffline() {
+  renderSpotifyWidget({
+    title: 'Not playing right now',
+    artist: 'Check back later',
+    art: null,
+    url: null,
+    playing: false,
+    label: 'Offline',
+  });
+}
 
-  // LIVE MODE
+async function fetchNowPlaying() {
   try {
-    const res = await fetch(SPOTIFY_API_URL);
-    if (res.status === 204 || res.status > 400) {
-      // Nothing playing
-      renderSpotifyWidget({ name: 'Not playing right now', artist: 'Spotify', art: null });
-      return;
-    }
+    const res = await fetch(SPOTIFY_API_URL, { cache: 'no-store' });
+    if (!res.ok) throw new Error('bad response');
     const data = await res.json();
-    renderSpotifyWidget({
-      name: data.item?.name || 'Unknown',
-      artist: data.item?.artists?.map(a => a.name).join(', ') || 'Unknown',
-      art: data.item?.album?.images?.[0]?.url || null,
-    });
-    // Poll every 30 seconds
-    setTimeout(fetchNowPlaying, 30000);
+
+    if (data.isPlaying && data.title) {
+      renderSpotifyWidget({
+        title: data.title,
+        artist: data.artist,
+        art: data.albumArt,
+        url: data.url,
+        playing: true,
+        label: 'Now Playing',
+      });
+    } else {
+      renderOffline();
+    }
   } catch (err) {
-    renderSpotifyWidget({ name: 'Could not connect', artist: 'Spotify', art: null });
+    renderOffline();
   }
 }
 
-document.addEventListener('DOMContentLoaded', fetchNowPlaying);
+document.addEventListener('DOMContentLoaded', () => {
+  fetchNowPlaying();
+  setInterval(fetchNowPlaying, POLL_MS);
+});
